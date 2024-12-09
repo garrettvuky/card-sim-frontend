@@ -1,0 +1,151 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(255, 255, 255);
+    font-size: 34px;
+    text-align: center;
+}
+
+input {
+    font-size: 34px;
+    text-align: center;
+}
+
+::placeholder {
+    color: #DF6A6A;
+}
+
+.sim-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    background-color: #292922;
+    border-style: solid;
+    border-width: 15px;
+    border-radius: 45px;
+    height: 900px;
+    width: 414px;
+}
+
+#back-arrow {
+    cursor: pointer;
+    text-align: left;
+    background-color: #292929;
+    width: 95%;
+    margin-top: 6%;
+    border: none;
+}
+
+#back {
+    height: 65px;
+    width: auto;
+}
+
+.username {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 2.5%;
+    padding-bottom: 10%;
+}
+
+
+#username-text {
+    color: #777;
+    font-size: .8em;
+}
+
+#username-input-div {
+    width: 85%;
+}
+
+#username-input {
+    cursor: pointer;
+    width: 85%;
+    padding-bottom: 5%;
+    padding-top: 5%;
+    border: solid;
+    border-color: #777;
+    border-radius: 60px;
+    color: #DF6A6A;
+    background-color: #777;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 1.4em;
+    text-shadow: -1px 1px 0 #000,
+        1px 1px 0 #000,
+        1px -1px 0 #000,
+        1px -1px 0 #000;
+}
+
+
+.gamecode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 2.5%;
+}
+
+#gamecode-text {
+    color: #777;
+    font-size: .8em;
+}
+
+#gamecode-input-div {
+    width: 85%;
+
+}
+
+#gamecode-input {
+    cursor: pointer;
+    width: 85%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    border: solid;
+    border-color: #777;
+    border-radius: 60px;
+    color: #DF6A6A;
+    background-color: #777;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 1.4em;
+    text-shadow: -1px 1px 0 #000,
+        1px 1px 0 #000,
+        1px -1px 0 #000,
+        1px -1px 0 #000;
+}
+
+.join {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80%;
+}
+
+#join-button-text {
+    height: 65px;
+    width: 80%;
+    font-size: 30px;
+}
+
+#join-button {
+    cursor: pointer;
+    height: 65px;
+    width: 100%;
+    background-color: #6ADF6A;
+    font-size: .76em;
+    color: white;
+    border-radius: 20px;
+    border-color: #000;
+    border-width: .1em;
+    text-shadow: -1px 1px 0 #000,
+        1px 1px 0 #000,
+        1px -1px 0 #000,
+        1px -1px 0 #000;
+}

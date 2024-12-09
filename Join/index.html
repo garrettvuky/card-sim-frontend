@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Simulator Home Screen</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+    <style>
+        body {
+            font-family: Inter;
+        }
+
+        button {
+            font-family: Inter;
+        }
+    </style>
+</head>
+<body class="page">
+    <div class="sim-container">
+        <div class="back-arrow">
+            <button id="back-arrow">
+                <a href="../index.html"><img id="back" src="arrow_back.png">
+            </button>
+            </a>
+        </div>
+        <div class="username">
+            <div id="username-text-div">
+                <p id="username-text">Username:</p>
+            </div>
+            <div class="username-input-div">
+                <input id="username-input" type=text placeholder="Username">
+            </div>
+        </div>
+        <div class="gamecode">
+            <div id="gamecode-text-div">
+                <p id="gamecode-text">Game Code:</p>
+            </div>
+            <div class="gamecode-input-div">
+                <input id="gamecode-input" type=text placeholder="Game Code">
+            </div>
+        </div>
+        <div class="join">
+            <p id="join-button-text">
+                <button id="join-button">Join game</button>
+            </p>
+        </div>
+    </div>
+    </div>
+    <script src="../join.js"></script>
+    <script src="../node_modules/socket.io-client/dist/socket.io.js"></script>
+    <script>
+        const socket = io("https://card-simulator.onrender.com");
+        const roomCode = document.getElementById("gamecode-input");
+        const usernameInput = document.getElementById("username-input");
+        const joinButton = document.getElementById("join-button");
+        let code = "";
+        let username = "";
+        socket.on("connect", () => {
+            console.log("Connected to server:", socket.id);
+        });
+
+        socket.on("disconnect", () => {
+            console.log("Disconnected from server");
+        });
+
+        const setRoomCode = (e) => {
+            code = e.target.value;
+        }
+
+        const setUsername = (e) => {
+            username = e.target.value;
+        }
+
+        const handleJoinGame = () => {
+            const args = {
+                room: code,
+                username
+            }
+            console.log(args);
+            console.log("joining game");
+            socket.emit("joinRoom", args);
+        }
+
+        socket.on('cardPulled', (res) => {
+                const handContainer = document.getElementById('hand-container');
+                const card = document.createElement('div');
+                card.style.height = '25%';
+                card.style.width = '15%';
+                card.innerText = res;
+                card.style.backgroundColor = 'white';
+                card.style.display = 'flex';
+                card.style.justifyContent = 'center';
+                card.style.alignItems = 'center';
+                card.style.border = '1px solid black';
+                card.style.borderRadius = '10%';
+                card.id = res;
+                card.className = 'hand-card';
+                handContainer.appendChild(card);
+
+                card.addEventListener('mouseover', () => {
+                        card.style.backgroundColor = 'grey'; // Change to grey on hover
+                    });
+
+                card.addEventListener('mouseout', () => {
+                    card.style.backgroundColor = 'white'; // Reset to white when mouse leaves
+                });
+                
+                card.addEventListener('mousedown', handleCardEvent);
+            })
+
+            socket.on('cardTabled', (res) => {
+                const tableContainer = document.getElementById('table-container');
+                const card = document.createElement('div');
+                card.style.height = '25%';
+                card.style.width = '15%';
+                card.innerText = res;
+                card.style.backgroundColor = 'white';
+                card.style.display = 'flex';
+                card.style.justifyContent = 'center';
+                card.style.alignItems = 'center';
+                card.style.border = '1px solid black';
+                card.style.borderRadius = '10%';
+                card.id = res;
+                card.className = 'hand-card';
+                tableContainer.appendChild(card);
+
+                card.addEventListener('mouseover', () => {
+                        card.style.backgroundColor = 'grey'; // Change to grey on hover
+                    });
+
+                card.addEventListener('mouseout', () => {
+                    card.style.backgroundColor = 'white'; // Reset to white when mouse leaves
+                });
+                
+                card.addEventListener('mousedown', handleCardEvent);
+        })
+
+        const setDrawFromDeckState = (e) => {
+                socket.emit('pullFromDeck');
+                actionState = 'from-deck'
+        }
+            
+        const setSendToTableState = (e) => {
+            const button1 = document.getElementById('drawFromDeckBtn');
+            const button2 = document.getElementById('sendToDeckBtn');
+            button1.style.backgroundColor = 'white';
+            button2.style.backgroundColor = 'white';
+            actionState = 'to-table'
+        }
+
+        const setSendToDeckState = (e) => {
+            const button1 = document.getElementById('sendToTableBtn');
+            const button2 = document.getElementById('drawFromDeckBtn');
+            button1.style.backgroundColor = 'white';
+            button2.style.backgroundColor = 'white';
+            actionState = 'to-deck'
+        }
+
+        const handleCardEvent = (e) => {
+            const handContainer = document.getElementById('hand-container');
+            const tableContainer = document.getElementById('table-container');
+            let card = e.target.innerText;
+            console.log('handling card event:', card);
+            switch (actionState) {
+                case 'to-table':
+                    socket.emit('tableCard', card);
+                    e.target.className = 'hand-card'
+                            ? handContainer.removeChild(e.target)
+                            : tableContainer.removeChild(e.target);
+                    break;
+                case 'to-deck':
+                    e.target.className = 'hand-card'
+                            ? handContainer.removeChild(e.target)
+                            : tableContainer.removeChild(e.target);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        socket.on('gameStarted', (res) => {
+                const simContainer = document.querySelector('.sim-container');
+                simContainer.innerHTML = '';
+                document.body.style.fontSize = '34px';
+
+                const containerWidth = simContainer.clientWidth;
+                const containerHeight = simContainer.clientHeight;
+
+                const tableContainer = document.createElement('div');
+                tableContainer.style.position = 'absolute';
+                tableContainer.style.width = `100%`;
+                tableContainer.style.height = '40%';
+                tableContainer.style.top = '0';
+                tableContainer.style.left = '0';
+                tableContainer.id = 'table-container';
+                tableContainer.style.display = 'flex';
+                tableContainer.style.justifyContent = "space-evenly";
+                tableContainer.style.alignItems = 'center';
+                tableContainer.style.flexWrap = 'wrap';
+                tableContainer.style.overflow = 'hidden';
+                tableContainer.style.borderTopRightRadius = '45px';
+                tableContainer.style.borderTopLeftRadius = '45px';
+
+                const handContainer = document.createElement('div');
+                handContainer.style.position = 'absolute';
+                handContainer.style.width = `100%`;
+                handContainer.style.height = '40%'; 
+                handContainer.style.bottom = '0';
+                handContainer.style.left = '0';
+                handContainer.style.display = 'flex';
+                handContainer.style.justifyContent = "space-evenly";
+                handContainer.style.alignItems = 'center';
+                handContainer.id = "hand-container";
+                handContainer.style.flexWrap = 'wrap';
+                handContainer.style.overflow = 'hidden';
+                handContainer.style.borderBottomLeftRadius = '45px';
+                handContainer.style.borderBottomRightRadius = '45px';
+
+                const buttonContainer = document.createElement('div');
+
+                buttonContainer.style.position = 'absolute';
+                buttonContainer.style.width = '100%';
+                buttonContainer.style.height = '20%';
+                buttonContainer.style.bottom = '40%';
+                buttonContainer.style.display = 'flex';
+                buttonContainer.style.justifyContent = "space-evenly";
+                buttonContainer.style.alignItems = 'center';
+
+                const drawFromDeck = document.createElement('button');
+                const sendToTable = document.createElement('button');
+                const sendToDeck = document.createElement('button');
+                drawFromDeck.innerText = 'Draw From Deck';
+                drawFromDeck.style.height = '50%';
+                drawFromDeck.style.width = '30%';
+                drawFromDeck.id = 'drawFromDeckBtn';
+                drawFromDeck.className = 'tableBtn';
+                sendToTable.innerText = 'Send to Table';
+                sendToTable.style.height = '50%';
+                sendToTable.style.width = '30%';
+                sendToTable.id = 'sendToTableBtn';
+                sendToTable.className = 'tableBtn';
+                sendToDeck.innerText = 'Send to Deck';
+                sendToDeck.style.height = '50%';
+                sendToDeck.style.width = '30%';
+                sendToDeck.id = 'sendToDeckBtn';
+                sendToDeck.className = 'tableBtn';
+
+                const handLabel = document.createElement('div');
+                handLabel.style.position = 'absolute';
+                handLabel.style.top = '0';
+                handLabel.style.width = '100%';
+                handLabel.style.textAlign = 'center';
+                handLabel.style.color = 'white';
+                handLabel.style.fontSize = '24px';
+                handLabel.style.fontWeight = 'bold';
+                handLabel.style.paddingTop = '10px';
+                handLabel.innerText = 'Hand';
+                handContainer.appendChild(handLabel);
+
+                const tableLabel = document.createElement('div');
+                tableLabel.style.position = 'absolute';
+                tableLabel.style.top = '0';
+                tableLabel.style.width = '100%';
+                tableLabel.style.textAlign = 'center';
+                tableLabel.style.fontSize = '24px';
+                tableLabel.style.color = 'white';
+                tableLabel.style.fontWeight = 'bold';
+                tableLabel.style.paddingTop = '10px';
+                tableLabel.innerText = 'Table';
+                tableContainer.appendChild(tableLabel);
+
+                drawFromDeck.addEventListener('mouseover', () => {
+                    drawFromDeck.style.backgroundColor = 'grey'; // Change to grey on hover
+                });
+
+                drawFromDeck.addEventListener('mouseout', () => {
+                        drawFromDeck.style.backgroundColor = 'white';
+                });
+                sendToTable.addEventListener('mouseover', () => {
+                    sendToTable.style.backgroundColor = 'grey'; // Change to grey on hover
+                });
+
+                sendToTable.addEventListener('mouseout', () => {
+                    if(actionState !== 'to-table') {
+                        sendToTable.style.backgroundColor = 'white';
+                    }
+                });
+                sendToDeck.addEventListener('mouseover', () => {
+                    sendToDeck.style.backgroundColor = 'grey'; // Change to grey on hover
+                });
+                sendToDeck.addEventListener('mouseout', () => {
+                    if(actionState !== 'to-deck') {
+                        sendToDeck.style.backgroundColor = 'white';
+                    }
+                });
+
+
+                buttonContainer.appendChild(drawFromDeck);
+                buttonContainer.appendChild(sendToTable);
+                buttonContainer.appendChild(sendToDeck);
+
+                drawFromDeck.addEventListener('mousedown', setDrawFromDeckState);
+                sendToTable.addEventListener('mousedown', setSendToTableState);
+                sendToDeck.addEventListener('mousedown', setSendToDeckState);
+
+                // Add the rectangles to the sim-container
+                simContainer.appendChild(tableContainer);
+                simContainer.appendChild(buttonContainer);
+                simContainer.appendChild(handContainer);
+
+                // Ensure the sim-container has relative positioning for proper absolute placement
+                simContainer.style.position = 'relative';
+                for(let i = 0; i < res.length; i++) {
+                    const card = document.createElement('div');
+                    card.style.height = '25%';
+                    card.style.width = '15%';
+                    card.innerText = res[i];
+                    card.style.backgroundColor = 'white';
+                    card.style.display = 'flex';
+                    card.style.justifyContent = 'center';
+                    card.style.alignItems = 'center';
+                    card.style.border = '1px solid black';
+                    card.style.borderRadius = '10%';
+                    card.id = res[i];
+                    card.className = 'hand-card';
+                    handContainer.appendChild(card);
+                    // Add event listeners for hover effect
+                    card.addEventListener('mouseover', () => {
+                        card.style.backgroundColor = 'grey'; // Change to grey on hover
+                    });
+
+                    card.addEventListener('mouseout', () => {
+                        card.style.backgroundColor = 'white'; // Reset to white when mouse leaves
+                    });
+                    card.addEventListener('mousedown', handleCardEvent);
+                }
+                console.log(res);
+            })
+
+        roomCode.addEventListener("input", setRoomCode);
+        usernameInput.addEventListener("input", setUsername);
+        joinButton.addEventListener("mousedown", handleJoinGame);
+    </script>
+</body>
+
+</html>

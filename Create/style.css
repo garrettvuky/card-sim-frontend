@@ -1,0 +1,432 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(255, 255, 255);
+    display: flex;
+}
+
+.sim-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    background-color: #292922;
+    border-style: solid;
+    border-width: 15px;
+    border-radius: 45px;
+    height: 900px;
+    width: 414px;
+    align-items: center;
+}
+
+.icons {
+    flex-direction: row;
+    text-align: center;
+    margin-top: 5%;
+}
+
+.code-boxes {
+    display: flex;
+    flex-direction: column;
+    height: 15%;
+    width: 85%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+#back-arrow {
+    cursor: pointer;
+    text-align: left;
+    background-color: #292929;
+    width: 95%;
+    height: 100%;
+    margin-top: 4%;
+    border: none;
+}
+
+.back-arrow {
+    width: 90%;
+    display: flex;
+    align-items: center;
+}
+
+#back {
+    height: 65px;
+    width: auto;
+}
+
+#join-text {
+    display: 'flex';
+    color: #777;
+    padding-bottom: 1%;
+
+}
+
+#join-code {
+    color: #DF6A6A;
+    background-color: #777;
+    border-radius: 60px;
+    height: 80%;
+    width: 100%;
+    font-size: 90px;
+    font-weight: bold;
+    font-style: italic;
+    text-shadow: -1px 1px 0 #000,
+        1px 1px 0 #000,
+        1px -1px 0 #000,
+        1px -1px 0 #000;
+}
+
+#message-button {
+    cursor: pointer;
+    height: 75px;
+    width: 75px;
+    margin: 0px;
+    vertical-align: top;
+    background-color: #292929;
+    border: none;
+}
+
+#clipboard-button {
+    cursor: pointer;
+    height: 75px;
+    width: 75px;
+    margin: 0px;
+    padding: 0px;
+    background-color: #292929;
+    border: none;
+}
+
+#share-button {
+    cursor: pointer;
+    height: 75px;
+    width: 75px;
+    margin: 0px;
+    padding: 0px;
+    background-color: #292929;
+    border: none;
+}
+
+
+.max-players {
+    display: flex;
+    padding-top: 2.5%;
+    margin-right: auto;
+    margin-left: auto;
+    height: 45px;
+    width: 85%;
+    background-color: #777;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    border-bottom-style: solid;
+    border-bottom-color: #000;
+    border-bottom-width: 1px;
+}
+
+#max-players-text {
+    padding-left: 5%;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+    text-align: left;
+    width: 85%;
+    color: #4CAF50;
+    text-shadow: -1px 1px 0 #000,
+        1px 1px 0 #000,
+        1px -1px 0 #000,
+        1px -1px 0 #000;
+}
+
+#max-players-input {
+    display: flex;
+    padding-right: 2.5%;
+    background-color: #777;
+    width: 18%;
+}
+
+#max-players-prompt {
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    border-color: 4CAF50;
+    border-style: solid 10px;
+    border-color: #4CAF50;
+    border-radius: 5px;
+    background-color: #777;
+    color: #4CAF50;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+    text-shadow: -1px 1px 0 #000,
+        1px 1px 0 #000,
+        1px -1px 0 #000,
+        1px -1px 0 #000;
+}
+
+.cards-dealt {
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    margin-right: auto;
+    margin-left: auto;
+    height: 45px;
+    width: 85%;
+    background-color: #777;
+    border-bottom-style: solid;
+    border-bottom-color: #000;
+    border-bottom-width: 1px;
+}
+
+#cards-dealt-text {
+    padding-left: 5%;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+    text-align: left;
+    width: 85%;
+    color: #4CAF50;
+    text-shadow: -1px 1px 0 #000,
+        1px 1px 0 #000,
+        1px -1px 0 #000,
+        1px -1px 0 #000;
+}
+
+#cards-dealt-input {
+    display: flex;
+    padding-right: 2.5%;
+    background-color: #777;
+    width: 18%;
+}
+
+#cards-dealt-prompt {
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    border-color: 4CAF50;
+    border-style: solid 10px;
+    border-color: #4CAF50;
+    border-radius: 5px;
+    background-color: #777;
+    color: #4CAF50;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+    text-shadow: -1px 1px 0 #000,
+        1px 1px 0 #000,
+        1px -1px 0 #000,
+        1px -1px 0 #000;
+}
+
+.facedown {
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+    height: 45px;
+    width: 85%;
+    background-color: #777;
+    padding-top: 10px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+#facedown-text {
+    padding-left: 5%;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+    text-align: left;
+    width: 85%;
+    color: #4CAF50;
+    text-shadow: -1px 1px 0 #000,
+        1px 1px 0 #000,
+        1px -1px 0 #000,
+        1px -1px 0 #000;
+}
+
+#facedown-input {
+
+    display: flex;
+    padding-right: 2.5%;
+    background-color: #777;
+    width: 15%;
+    text-shadow: -1px 1px 0 #000,
+        1px 1px 0 #000,
+        1px -1px 0 #000,
+        1px -1px 0 #000;
+}
+
+input[type="checkbox"].toggle+label {
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    font-size: 20px;
+    align-items: center;
+}
+
+input[type="checkbox"].toggle {
+    opacity: 0;
+    display: none;
+    cursor: pointer;
+    left: -9000px;
+    top: -9000px;
+}
+
+input[type="checkbox"].toggle+label::before {
+    content: "";
+    background-color: #8a918d;
+    width: 3em;
+    height: 1.5em;
+    border-radius: 1em;
+    color: #4CAF50;
+    margin-right: .25em;
+}
+
+input[type="checkbox"].toggle:checked+label::before {
+    left: 1.5em;
+    background-color: #4CAF50;
+}
+
+input[type="checkbox"].toggle+label::after {
+    position: absolute;
+    left: 0;
+    content: "";
+    background-color: #000;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 1em;
+    color: #4CAF50;
+}
+
+input[type="checkbox"].toggle:checked+label::after {
+    left: 1.5em;
+    background-color: #000;
+}
+
+input[type="checkbox"].toggle:checked+label {
+    color: #4CAF50;
+}
+
+.create {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#create-button-text {
+    height: 65px;
+    width: 80%;
+    font-size: 30px;
+}
+
+#create-button {
+    cursor: pointer;
+    height: 65px;
+    width: 100%;
+    background-color: #6ADF6A;
+    font-size: .76em;
+    color: white;
+    border-radius: 20px;
+    border-color: #000;
+    border-width: .1em;
+    text-shadow: -1px 1px 0 #000,
+        1px 1px 0 #000,
+        1px -1px 0 #000,
+        1px -1px 0 #000;
+}
+
+.username {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 2.5%;
+    padding-bottom: 10%;
+}
+
+
+#username-text {
+    color: #777;
+    font-size: .8em;
+}
+
+#username-input-div {
+    width: 85%;
+}
+
+#username-input {
+    cursor: pointer;
+    width: 100%;
+    padding-bottom: 5%;
+    padding-top: 5%;
+    border: solid;
+    border-color: #777;
+    border-radius: 60px;
+    color: #DF6A6A;
+    background-color: #777;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 1.4em;
+    padding-left: 15px;
+    text-shadow: -1px 1px 0 #000,
+        1px 1px 0 #000,
+        1px -1px 0 #000,
+        1px -1px 0 #000;
+}
+
+.player-container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align the content to the left */
+    justify-content: flex-start; /* Start from the top */
+    height: auto; /* Adjust height to content */
+    width: 85%;
+    background-color: #777;
+    border: solid;
+    border-color: #777;
+    margin-top: 2%;
+    margin-bottom: 10%;
+    border-radius: 15px;
+    padding: 2%; /* Adjust padding for better spacing */
+}
+
+#player-table {
+    width: 100%;
+    border-collapse: collapse; /* Ensure table rows don't have spacing between them */
+}
+
+thead {
+    width: 100%;
+    text-align: left; /* Ensure the heading is aligned to the left */
+}
+
+th {
+    padding: 8px; /* Add padding to make it more readable */
+}
+
+tr {
+    width: 100%;
+}
+
+td {
+    width: 100%;
+    padding: 8px; /* Add padding for spacing in table cells */
+    text-align: left; /* Align table cells to the left */
+}
+
+.spinner {
+    border: 5px solid #f3f3f3; /* Light gray */
+    border-top: 5px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

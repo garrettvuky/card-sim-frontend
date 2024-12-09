@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Simulator Home Screen</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+  <style>
+    body {
+      font-family: Inter;
+    }
+
+    button {
+      font-family: Inter;
+    }
+  </style>
+
+</head>
+
+<body class="page">
+
+  <div class="sim-container">
+
+    <div class="title">
+      <h2>Card</h2>
+      <h2>Simulator</h2>
+    </div>
+
+
+
+    <div class="create">
+      <p>
+        <a> <button id="create-button">Create game</button>
+        </a>
+      </p>
+    </div>
+
+    <div class="loading" id="loading" style="display: none;">
+      <p>Loading...</p>
+      <div class="spinner"></div> <!-- You can replace this with an actual spinner image or use CSS animation -->
+    </div>
+    
+
+    <div class="join">
+      <p>
+        <a><button id="join-button">Join game</button>
+        </a>
+      </p>
+    </div>
+
+  </div>
+  <script src="home.js" type="module"></script>
+</body>
+
+</html>
