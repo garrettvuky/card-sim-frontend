@@ -19,6 +19,7 @@
         }
     </style>
 </head>
+
 <body class="page">
     <div class="sim-container">
         <div class="back-arrow">
@@ -32,7 +33,7 @@
                 <p id="username-text">Username:</p>
             </div>
             <div class="username-input-div">
-                <input id="username-input" type=text placeholder="Username">
+                <input id="username-input" type=text placeholder="Username" maxlength="10">
             </div>
         </div>
         <div class="gamecode">
@@ -40,7 +41,7 @@
                 <p id="gamecode-text">Game Code:</p>
             </div>
             <div class="gamecode-input-div">
-                <input id="gamecode-input" type=text placeholder="Game Code">
+                <input id="gamecode-input" type=number placeholder="Game Code" maxlength="10">
             </div>
         </div>
         <div class="join">
@@ -86,64 +87,64 @@
         }
 
         socket.on('cardPulled', (res) => {
-                const handContainer = document.getElementById('hand-container');
-                const card = document.createElement('div');
-                card.style.height = '25%';
-                card.style.width = '15%';
-                card.innerText = res;
-                card.style.backgroundColor = 'white';
-                card.style.display = 'flex';
-                card.style.justifyContent = 'center';
-                card.style.alignItems = 'center';
-                card.style.border = '1px solid black';
-                card.style.borderRadius = '10%';
-                card.id = res;
-                card.className = 'hand-card';
-                handContainer.appendChild(card);
+            const handContainer = document.getElementById('hand-container');
+            const card = document.createElement('div');
+            card.style.height = '25%';
+            card.style.width = '15%';
+            card.innerText = res;
+            card.style.backgroundColor = 'white';
+            card.style.display = 'flex';
+            card.style.justifyContent = 'center';
+            card.style.alignItems = 'center';
+            card.style.border = '1px solid black';
+            card.style.borderRadius = '10%';
+            card.id = res;
+            card.className = 'hand-card';
+            handContainer.appendChild(card);
 
-                card.addEventListener('mouseover', () => {
-                        card.style.backgroundColor = 'grey'; // Change to grey on hover
-                    });
+            card.addEventListener('mouseover', () => {
+                card.style.backgroundColor = 'grey'; // Change to grey on hover
+            });
 
-                card.addEventListener('mouseout', () => {
-                    card.style.backgroundColor = 'white'; // Reset to white when mouse leaves
-                });
-                
-                card.addEventListener('mousedown', handleCardEvent);
-            })
+            card.addEventListener('mouseout', () => {
+                card.style.backgroundColor = 'white'; // Reset to white when mouse leaves
+            });
 
-            socket.on('cardTabled', (res) => {
-                const tableContainer = document.getElementById('table-container');
-                const card = document.createElement('div');
-                card.style.height = '25%';
-                card.style.width = '15%';
-                card.innerText = res;
-                card.style.backgroundColor = 'white';
-                card.style.display = 'flex';
-                card.style.justifyContent = 'center';
-                card.style.alignItems = 'center';
-                card.style.border = '1px solid black';
-                card.style.borderRadius = '10%';
-                card.id = res;
-                card.className = 'hand-card';
-                tableContainer.appendChild(card);
+            card.addEventListener('mousedown', handleCardEvent);
+        })
 
-                card.addEventListener('mouseover', () => {
-                        card.style.backgroundColor = 'grey'; // Change to grey on hover
-                    });
+        socket.on('cardTabled', (res) => {
+            const tableContainer = document.getElementById('table-container');
+            const card = document.createElement('div');
+            card.style.height = '25%';
+            card.style.width = '15%';
+            card.innerText = res;
+            card.style.backgroundColor = 'white';
+            card.style.display = 'flex';
+            card.style.justifyContent = 'center';
+            card.style.alignItems = 'center';
+            card.style.border = '1px solid black';
+            card.style.borderRadius = '10%';
+            card.id = res;
+            card.className = 'hand-card';
+            tableContainer.appendChild(card);
 
-                card.addEventListener('mouseout', () => {
-                    card.style.backgroundColor = 'white'; // Reset to white when mouse leaves
-                });
-                
-                card.addEventListener('mousedown', handleCardEvent);
+            card.addEventListener('mouseover', () => {
+                card.style.backgroundColor = 'grey'; // Change to grey on hover
+            });
+
+            card.addEventListener('mouseout', () => {
+                card.style.backgroundColor = 'white'; // Reset to white when mouse leaves
+            });
+
+            card.addEventListener('mousedown', handleCardEvent);
         })
 
         const setDrawFromDeckState = (e) => {
-                socket.emit('pullFromDeck');
-                actionState = 'from-deck'
+            socket.emit('pullFromDeck');
+            actionState = 'from-deck'
         }
-            
+
         const setSendToTableState = (e) => {
             const button1 = document.getElementById('drawFromDeckBtn');
             const button2 = document.getElementById('sendToDeckBtn');
@@ -169,13 +170,13 @@
                 case 'to-table':
                     socket.emit('tableCard', card);
                     e.target.className = 'hand-card'
-                            ? handContainer.removeChild(e.target)
-                            : tableContainer.removeChild(e.target);
+                        ? handContainer.removeChild(e.target)
+                        : tableContainer.removeChild(e.target);
                     break;
                 case 'to-deck':
                     e.target.className = 'hand-card'
-                            ? handContainer.removeChild(e.target)
-                            : tableContainer.removeChild(e.target);
+                        ? handContainer.removeChild(e.target)
+                        : tableContainer.removeChild(e.target);
                     break;
                 default:
                     break;
@@ -183,163 +184,163 @@
         }
 
         socket.on('gameStarted', (res) => {
-                const simContainer = document.querySelector('.sim-container');
-                simContainer.innerHTML = '';
-                document.body.style.fontSize = '34px';
+            const simContainer = document.querySelector('.sim-container');
+            simContainer.innerHTML = '';
+            document.body.style.fontSize = '34px';
 
-                const containerWidth = simContainer.clientWidth;
-                const containerHeight = simContainer.clientHeight;
+            const containerWidth = simContainer.clientWidth;
+            const containerHeight = simContainer.clientHeight;
 
-                const tableContainer = document.createElement('div');
-                tableContainer.style.position = 'absolute';
-                tableContainer.style.width = `100%`;
-                tableContainer.style.height = '40%';
-                tableContainer.style.top = '0';
-                tableContainer.style.left = '0';
-                tableContainer.id = 'table-container';
-                tableContainer.style.display = 'flex';
-                tableContainer.style.justifyContent = "space-evenly";
-                tableContainer.style.alignItems = 'center';
-                tableContainer.style.flexWrap = 'wrap';
-                tableContainer.style.overflow = 'hidden';
-                tableContainer.style.borderTopRightRadius = '45px';
-                tableContainer.style.borderTopLeftRadius = '45px';
+            const tableContainer = document.createElement('div');
+            tableContainer.style.position = 'absolute';
+            tableContainer.style.width = `100%`;
+            tableContainer.style.height = '40%';
+            tableContainer.style.top = '0';
+            tableContainer.style.left = '0';
+            tableContainer.id = 'table-container';
+            tableContainer.style.display = 'flex';
+            tableContainer.style.justifyContent = "space-evenly";
+            tableContainer.style.alignItems = 'center';
+            tableContainer.style.flexWrap = 'wrap';
+            tableContainer.style.overflow = 'hidden';
+            tableContainer.style.borderTopRightRadius = '45px';
+            tableContainer.style.borderTopLeftRadius = '45px';
 
-                const handContainer = document.createElement('div');
-                handContainer.style.position = 'absolute';
-                handContainer.style.width = `100%`;
-                handContainer.style.height = '40%'; 
-                handContainer.style.bottom = '0';
-                handContainer.style.left = '0';
-                handContainer.style.display = 'flex';
-                handContainer.style.justifyContent = "space-evenly";
-                handContainer.style.alignItems = 'center';
-                handContainer.id = "hand-container";
-                handContainer.style.flexWrap = 'wrap';
-                handContainer.style.overflow = 'hidden';
-                handContainer.style.borderBottomLeftRadius = '45px';
-                handContainer.style.borderBottomRightRadius = '45px';
+            const handContainer = document.createElement('div');
+            handContainer.style.position = 'absolute';
+            handContainer.style.width = `100%`;
+            handContainer.style.height = '40%';
+            handContainer.style.bottom = '0';
+            handContainer.style.left = '0';
+            handContainer.style.display = 'flex';
+            handContainer.style.justifyContent = "space-evenly";
+            handContainer.style.alignItems = 'center';
+            handContainer.id = "hand-container";
+            handContainer.style.flexWrap = 'wrap';
+            handContainer.style.overflow = 'hidden';
+            handContainer.style.borderBottomLeftRadius = '45px';
+            handContainer.style.borderBottomRightRadius = '45px';
 
-                const buttonContainer = document.createElement('div');
+            const buttonContainer = document.createElement('div');
 
-                buttonContainer.style.position = 'absolute';
-                buttonContainer.style.width = '100%';
-                buttonContainer.style.height = '20%';
-                buttonContainer.style.bottom = '40%';
-                buttonContainer.style.display = 'flex';
-                buttonContainer.style.justifyContent = "space-evenly";
-                buttonContainer.style.alignItems = 'center';
+            buttonContainer.style.position = 'absolute';
+            buttonContainer.style.width = '100%';
+            buttonContainer.style.height = '20%';
+            buttonContainer.style.bottom = '40%';
+            buttonContainer.style.display = 'flex';
+            buttonContainer.style.justifyContent = "space-evenly";
+            buttonContainer.style.alignItems = 'center';
 
-                const drawFromDeck = document.createElement('button');
-                const sendToTable = document.createElement('button');
-                const sendToDeck = document.createElement('button');
-                drawFromDeck.innerText = 'Draw From Deck';
-                drawFromDeck.style.height = '50%';
-                drawFromDeck.style.width = '30%';
-                drawFromDeck.id = 'drawFromDeckBtn';
-                drawFromDeck.className = 'tableBtn';
-                sendToTable.innerText = 'Send to Table';
-                sendToTable.style.height = '50%';
-                sendToTable.style.width = '30%';
-                sendToTable.id = 'sendToTableBtn';
-                sendToTable.className = 'tableBtn';
-                sendToDeck.innerText = 'Send to Deck';
-                sendToDeck.style.height = '50%';
-                sendToDeck.style.width = '30%';
-                sendToDeck.id = 'sendToDeckBtn';
-                sendToDeck.className = 'tableBtn';
+            const drawFromDeck = document.createElement('button');
+            const sendToTable = document.createElement('button');
+            const sendToDeck = document.createElement('button');
+            drawFromDeck.innerText = 'Draw From Deck';
+            drawFromDeck.style.height = '50%';
+            drawFromDeck.style.width = '30%';
+            drawFromDeck.id = 'drawFromDeckBtn';
+            drawFromDeck.className = 'tableBtn';
+            sendToTable.innerText = 'Send to Table';
+            sendToTable.style.height = '50%';
+            sendToTable.style.width = '30%';
+            sendToTable.id = 'sendToTableBtn';
+            sendToTable.className = 'tableBtn';
+            sendToDeck.innerText = 'Send to Deck';
+            sendToDeck.style.height = '50%';
+            sendToDeck.style.width = '30%';
+            sendToDeck.id = 'sendToDeckBtn';
+            sendToDeck.className = 'tableBtn';
 
-                const handLabel = document.createElement('div');
-                handLabel.style.position = 'absolute';
-                handLabel.style.top = '0';
-                handLabel.style.width = '100%';
-                handLabel.style.textAlign = 'center';
-                handLabel.style.color = 'white';
-                handLabel.style.fontSize = '24px';
-                handLabel.style.fontWeight = 'bold';
-                handLabel.style.paddingTop = '10px';
-                handLabel.innerText = 'Hand';
-                handContainer.appendChild(handLabel);
+            const handLabel = document.createElement('div');
+            handLabel.style.position = 'absolute';
+            handLabel.style.top = '0';
+            handLabel.style.width = '100%';
+            handLabel.style.textAlign = 'center';
+            handLabel.style.color = 'white';
+            handLabel.style.fontSize = '24px';
+            handLabel.style.fontWeight = 'bold';
+            handLabel.style.paddingTop = '10px';
+            handLabel.innerText = 'Hand';
+            handContainer.appendChild(handLabel);
 
-                const tableLabel = document.createElement('div');
-                tableLabel.style.position = 'absolute';
-                tableLabel.style.top = '0';
-                tableLabel.style.width = '100%';
-                tableLabel.style.textAlign = 'center';
-                tableLabel.style.fontSize = '24px';
-                tableLabel.style.color = 'white';
-                tableLabel.style.fontWeight = 'bold';
-                tableLabel.style.paddingTop = '10px';
-                tableLabel.innerText = 'Table';
-                tableContainer.appendChild(tableLabel);
+            const tableLabel = document.createElement('div');
+            tableLabel.style.position = 'absolute';
+            tableLabel.style.top = '0';
+            tableLabel.style.width = '100%';
+            tableLabel.style.textAlign = 'center';
+            tableLabel.style.fontSize = '24px';
+            tableLabel.style.color = 'white';
+            tableLabel.style.fontWeight = 'bold';
+            tableLabel.style.paddingTop = '10px';
+            tableLabel.innerText = 'Table';
+            tableContainer.appendChild(tableLabel);
 
-                drawFromDeck.addEventListener('mouseover', () => {
-                    drawFromDeck.style.backgroundColor = 'grey'; // Change to grey on hover
-                });
+            drawFromDeck.addEventListener('mouseover', () => {
+                drawFromDeck.style.backgroundColor = 'grey'; // Change to grey on hover
+            });
 
-                drawFromDeck.addEventListener('mouseout', () => {
-                        drawFromDeck.style.backgroundColor = 'white';
-                });
-                sendToTable.addEventListener('mouseover', () => {
-                    sendToTable.style.backgroundColor = 'grey'; // Change to grey on hover
-                });
+            drawFromDeck.addEventListener('mouseout', () => {
+                drawFromDeck.style.backgroundColor = 'white';
+            });
+            sendToTable.addEventListener('mouseover', () => {
+                sendToTable.style.backgroundColor = 'grey'; // Change to grey on hover
+            });
 
-                sendToTable.addEventListener('mouseout', () => {
-                    if(actionState !== 'to-table') {
-                        sendToTable.style.backgroundColor = 'white';
-                    }
-                });
-                sendToDeck.addEventListener('mouseover', () => {
-                    sendToDeck.style.backgroundColor = 'grey'; // Change to grey on hover
-                });
-                sendToDeck.addEventListener('mouseout', () => {
-                    if(actionState !== 'to-deck') {
-                        sendToDeck.style.backgroundColor = 'white';
-                    }
-                });
-
-
-                buttonContainer.appendChild(drawFromDeck);
-                buttonContainer.appendChild(sendToTable);
-                buttonContainer.appendChild(sendToDeck);
-
-                drawFromDeck.addEventListener('mousedown', setDrawFromDeckState);
-                sendToTable.addEventListener('mousedown', setSendToTableState);
-                sendToDeck.addEventListener('mousedown', setSendToDeckState);
-
-                // Add the rectangles to the sim-container
-                simContainer.appendChild(tableContainer);
-                simContainer.appendChild(buttonContainer);
-                simContainer.appendChild(handContainer);
-
-                // Ensure the sim-container has relative positioning for proper absolute placement
-                simContainer.style.position = 'relative';
-                for(let i = 0; i < res.length; i++) {
-                    const card = document.createElement('div');
-                    card.style.height = '25%';
-                    card.style.width = '15%';
-                    card.innerText = res[i];
-                    card.style.backgroundColor = 'white';
-                    card.style.display = 'flex';
-                    card.style.justifyContent = 'center';
-                    card.style.alignItems = 'center';
-                    card.style.border = '1px solid black';
-                    card.style.borderRadius = '10%';
-                    card.id = res[i];
-                    card.className = 'hand-card';
-                    handContainer.appendChild(card);
-                    // Add event listeners for hover effect
-                    card.addEventListener('mouseover', () => {
-                        card.style.backgroundColor = 'grey'; // Change to grey on hover
-                    });
-
-                    card.addEventListener('mouseout', () => {
-                        card.style.backgroundColor = 'white'; // Reset to white when mouse leaves
-                    });
-                    card.addEventListener('mousedown', handleCardEvent);
+            sendToTable.addEventListener('mouseout', () => {
+                if (actionState !== 'to-table') {
+                    sendToTable.style.backgroundColor = 'white';
                 }
-                console.log(res);
-            })
+            });
+            sendToDeck.addEventListener('mouseover', () => {
+                sendToDeck.style.backgroundColor = 'grey'; // Change to grey on hover
+            });
+            sendToDeck.addEventListener('mouseout', () => {
+                if (actionState !== 'to-deck') {
+                    sendToDeck.style.backgroundColor = 'white';
+                }
+            });
+
+
+            buttonContainer.appendChild(drawFromDeck);
+            buttonContainer.appendChild(sendToTable);
+            buttonContainer.appendChild(sendToDeck);
+
+            drawFromDeck.addEventListener('mousedown', setDrawFromDeckState);
+            sendToTable.addEventListener('mousedown', setSendToTableState);
+            sendToDeck.addEventListener('mousedown', setSendToDeckState);
+
+            // Add the rectangles to the sim-container
+            simContainer.appendChild(tableContainer);
+            simContainer.appendChild(buttonContainer);
+            simContainer.appendChild(handContainer);
+
+            // Ensure the sim-container has relative positioning for proper absolute placement
+            simContainer.style.position = 'relative';
+            for (let i = 0; i < res.length; i++) {
+                const card = document.createElement('div');
+                card.style.height = '25%';
+                card.style.width = '15%';
+                card.innerText = res[i];
+                card.style.backgroundColor = 'white';
+                card.style.display = 'flex';
+                card.style.justifyContent = 'center';
+                card.style.alignItems = 'center';
+                card.style.border = '1px solid black';
+                card.style.borderRadius = '10%';
+                card.id = res[i];
+                card.className = 'hand-card';
+                handContainer.appendChild(card);
+                // Add event listeners for hover effect
+                card.addEventListener('mouseover', () => {
+                    card.style.backgroundColor = 'grey'; // Change to grey on hover
+                });
+
+                card.addEventListener('mouseout', () => {
+                    card.style.backgroundColor = 'white'; // Reset to white when mouse leaves
+                });
+                card.addEventListener('mousedown', handleCardEvent);
+            }
+            console.log(res);
+        })
 
         roomCode.addEventListener("input", setRoomCode);
         usernameInput.addEventListener("input", setUsername);

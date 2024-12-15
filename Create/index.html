@@ -29,7 +29,8 @@
 
         <div class="code-boxes">
             <div class="loading" id="loading">
-                <div class="spinner"></div> <!-- You can replace this with an actual spinner image or use CSS animation -->
+                <div class="spinner"></div>
+                <!-- You can replace this with an actual spinner image or use CSS animation -->
             </div>
             <div id="join-text">
                 <p>Join the game using this code</p>
@@ -57,7 +58,7 @@
                 <p id="username-text">Username:</p>
             </div>
             <div class="username-input-div" id="username">
-                <input id="username-input" type=text placeholder="Username">
+                <input id="username-input" type=text placeholder="Username" maxlength="10">
             </div>
         </div>
 
@@ -66,7 +67,7 @@
                 <p>Maximum Players: </p>
             </div>
             <div id="max-players-input" id="maximumPlayers">
-                <p><input id="max-players-prompt" type="text" placeholder="#"></prompt>
+                <p><input id="max-players-prompt" type="number" placeholder="#" min="0" max="8"></prompt>
                 </p>
             </div>
         </div>
@@ -76,7 +77,7 @@
                 <p>Cards Dealt on Start: </p>
             </div>
             <div id="cards-dealt-input">
-                <p><input id="cards-dealt-prompt" type="text" placeholder="#"></prompt>
+                <p><input id="cards-dealt-prompt" type="number" placeholder="#" min="0" max="52" </prompt>
                 </p>
             </div>
         </div>
@@ -137,7 +138,7 @@
             const setDrawFromDeckState = (e) => {
                 socket.emit('pullFromDeck');
             }
-            
+
             const setSendToTableState = (e) => {
                 const button1 = document.getElementById('drawFromDeckBtn');
                 const button2 = document.getElementById('sendToDeckBtn');
@@ -163,20 +164,20 @@
                     case 'to-table':
                         socket.emit('tableCard', card);
                         e.target.className = 'hand-card'
-                                ? handContainer.removeChild(e.target)
-                                : tableContainer.removeChild(e.target);
+                            ? handContainer.removeChild(e.target)
+                            : tableContainer.removeChild(e.target);
                         break;
                     case 'to-deck':
                         socket.emit('sendToDeck', card);
                         e.target.className = 'hand-card'
-                                ? handContainer.removeChild(e.target)
-                                : tableContainer.removeChild(e.target);
+                            ? handContainer.removeChild(e.target)
+                            : tableContainer.removeChild(e.target);
                         break;
                     default:
                         break;
                 }
             }
-            
+
 
             const args = {
                 room: roomCode,
@@ -196,7 +197,7 @@
             });
 
             socket.on('cardPulled', (res) => {
-                if(res === "The deck is empty.") {
+                if (res === "The deck is empty.") {
                     return alert("The deck is emtpy");
                 }
                 const handContainer = document.getElementById('hand-container');
@@ -216,13 +217,13 @@
                 handContainer.appendChild(card);
 
                 card.addEventListener('mouseover', () => {
-                        card.style.backgroundColor = 'grey'; // Change to grey on hover
-                    });
+                    card.style.backgroundColor = 'grey'; // Change to grey on hover
+                });
 
                 card.addEventListener('mouseout', () => {
                     card.style.backgroundColor = 'white'; // Reset to white when mouse leaves
                 });
-                
+
                 card.addEventListener('mousedown', handleCardEvent);
             })
 
@@ -242,15 +243,15 @@
                 card.className = 'hand-card';
                 card.style.fontSize = '34px';
                 tableContainer.appendChild(card);
-                
+
                 card.addEventListener('mouseover', () => {
-                        card.style.backgroundColor = 'grey'; // Change to grey on hover
-                    });
+                    card.style.backgroundColor = 'grey'; // Change to grey on hover
+                });
 
                 card.addEventListener('mouseout', () => {
                     card.style.backgroundColor = 'white'; // Reset to white when mouse leaves
                 });
-                
+
                 card.addEventListener('mousedown', handleCardEvent);
             })
 
@@ -280,7 +281,7 @@
                 const handContainer = document.createElement('div');
                 handContainer.style.position = 'absolute';
                 handContainer.style.width = `100%`;
-                handContainer.style.height = '40%'; 
+                handContainer.style.height = '40%';
                 handContainer.style.bottom = '0';
                 handContainer.style.left = '0';
                 handContainer.style.display = 'flex';
@@ -350,14 +351,14 @@
                 });
 
                 drawFromDeck.addEventListener('mouseout', () => {
-                        drawFromDeck.style.backgroundColor = 'white';
+                    drawFromDeck.style.backgroundColor = 'white';
                 });
                 sendToTable.addEventListener('mouseover', () => {
                     sendToTable.style.backgroundColor = 'grey'; // Change to grey on hover
                 });
 
                 sendToTable.addEventListener('mouseout', () => {
-                    if(actionState !== 'to-table') {
+                    if (actionState !== 'to-table') {
                         sendToTable.style.backgroundColor = 'white';
                     }
                 });
@@ -365,7 +366,7 @@
                     sendToDeck.style.backgroundColor = 'grey'; // Change to grey on hover
                 });
                 sendToDeck.addEventListener('mouseout', () => {
-                    if(actionState !== 'to-deck') {
+                    if (actionState !== 'to-deck') {
                         sendToDeck.style.backgroundColor = 'white';
                     }
                 });
@@ -386,7 +387,7 @@
 
                 // Ensure the sim-container has relative positioning for proper absolute placement
                 simContainer.style.position = 'relative';
-                for(let i = 0; i < res.length; i++) {
+                for (let i = 0; i < res.length; i++) {
                     const card = document.createElement('div');
                     card.style.height = '25%';
                     card.style.width = '15%';

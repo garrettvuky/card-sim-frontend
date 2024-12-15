@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(255, 255, 255);
+    font-size: 34px;
+    text-align: center;
+}
+
+input {
+    font-size: 34px;
+    text-align: center;
+}
+
+::placeholder {
+    color: #DF6A6A;
+}
+
+.sim-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    background-color: #292922;
+    border-style: solid;
+    border-width: 15px;
+    border-radius: 45px;
+    height: 900px;
+    width: 414px;
+}
+
+#back-arrow {
+    cursor: pointer;
+    text-align: left;
+    background-color: #292929;
+    width: 95%;
+    margin-top: 6%;
+    border: none;
+}
+
+#back {
+    height: 65px;
+    width: auto;
+}
+
+
+.joined {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12.5%;
+}
+
+#joined-text {
+    width: 95%;
+
+    border: solid;
+    border-color: #777;
+    border-radius: 60px;
+    color: #DF6A6A;
+    background-color: #777;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 1.0em;
+    text-shadow: -1px 1px 0 #000,
+        1px 1px 0 #000,
+        1px -1px 0 #000,
+        1px -1px 0 #000;
+}
+
+
+.loader-holder {
+    display: flex;
+    justify-content: center;
+    padding-top: 25%;
+}
+
+/* HTML: <div class="loader"></div> */
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: 160px;
+    height: 140px;
+    border: 5px solid #777;
+    border-radius: 5px;
+    padding: 0 8px;
+    box-sizing: border-box;
+    background:
+        linear-gradient(#6ADF6A 0 0) 0 0/8px 20px,
+        linear-gradient(#6ADF6A 0 0) 100% 0/8px 20px,
+        radial-gradient(farthest-side, #DF6A6A 90%, #777) 0 5px/8px 8px content-box,
+        #777;
+    background-repeat: no-repeat;
+    animation: l3 4s infinite linear;
+}
+
+@keyframes l3 {
+    25% {
+        background-position: 0 0, 100% 100%, 100% calc(100% - 5px)
+    }
+
+    50% {
+        background-position: 0 100%, 100% 100%, 0 calc(100% - 5px)
+    }
+
+    75% {
+        background-position: 0 100%, 100% 0, 100% 5px
+    }
+}
