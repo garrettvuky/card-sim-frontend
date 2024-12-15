@@ -157,7 +157,7 @@
             const handleCardEvent = (e) => {
                 const handContainer = document.getElementById('hand-container');
                 const tableContainer = document.getElementById('table-container');
-                let card = e.target.innerText;
+                let card = e.target.id;
                 console.log('handling card event:', card);
                 switch (actionState) {
                     case 'to-table':
@@ -203,8 +203,8 @@
                 const card = document.createElement('div');
                 card.style.height = '25%';
                 card.style.width = '15%';
-                card.innerText = res;
-                card.style.backgroundColor = 'white';
+                card.style.backgroundImage = `url(../cards/${res}.png)`;
+                card.style.backgroundSize = 'cover';
                 card.style.display = 'flex';
                 card.style.justifyContent = 'center';
                 card.style.alignItems = 'center';
@@ -231,8 +231,8 @@
                 const card = document.createElement('div');
                 card.style.height = '25%';
                 card.style.width = '15%';
-                card.innerText = res;
-                card.style.backgroundColor = 'white';
+                card.style.backgroundImage = `url(../cards/${res}.png)`;
+                card.style.backgroundSize = 'cover';
                 card.style.display = 'flex';
                 card.style.justifyContent = 'center';
                 card.style.alignItems = 'center';
@@ -387,11 +387,12 @@
                 // Ensure the sim-container has relative positioning for proper absolute placement
                 simContainer.style.position = 'relative';
                 for(let i = 0; i < res.length; i++) {
+                    console.log(res[i]);
                     const card = document.createElement('div');
                     card.style.height = '25%';
                     card.style.width = '15%';
-                    card.innerText = res[i];
-                    card.style.backgroundColor = 'white';
+                    card.style.backgroundImage = `url(../cards/${res[i]}.png)`;
+                    card.style.backgroundSize = 'cover';
                     card.style.display = 'flex';
                     card.style.justifyContent = 'center';
                     card.style.alignItems = 'center';
