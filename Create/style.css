@@ -319,7 +319,7 @@ input[type="checkbox"].toggle:checked+label {
 #create-button-text {
     height: 65px;
     width: 80%;
-    font-size: 30px;
+    font-size: 34px;
 }
 
 #create-button {
@@ -346,7 +346,6 @@ input[type="checkbox"].toggle:checked+label {
     margin-top: 2.5%;
     padding-bottom: 10%;
 }
-
 
 #username-text {
     color: #777;
@@ -379,10 +378,14 @@ input[type="checkbox"].toggle:checked+label {
 
 .player-container {
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: flex-start; /* Align the content to the left */
-    justify-content: flex-start; /* Start from the top */
-    height: auto; /* Adjust height to content */
+    flex-direction: column;
+    /* Stack items vertically */
+    align-items: flex-start;
+    /* Align the content to the left */
+    justify-content: flex-start;
+    /* Start from the top */
+    height: auto;
+    /* Adjust height to content */
     width: 85%;
     background-color: #777;
     border: solid;
@@ -390,21 +393,25 @@ input[type="checkbox"].toggle:checked+label {
     margin-top: 2%;
     margin-bottom: 10%;
     border-radius: 15px;
-    padding: 2%; /* Adjust padding for better spacing */
+    padding: 2%;
+    /* Adjust padding for better spacing */
 }
 
 #player-table {
     width: 100%;
-    border-collapse: collapse; /* Ensure table rows don't have spacing between them */
+    border-collapse: collapse;
+    /* Ensure table rows don't have spacing between them */
 }
 
 thead {
     width: 100%;
-    text-align: left; /* Ensure the heading is aligned to the left */
+    text-align: left;
+    /* Ensure the heading is aligned to the left */
 }
 
 th {
-    padding: 8px; /* Add padding to make it more readable */
+    padding: 8px;
+    /* Add padding to make it more readable */
 }
 
 tr {
@@ -412,21 +419,35 @@ tr {
 }
 
 td {
+    color: #DF6A6A;
+    text-shadow: -1px 1px 0 #000,
+        1px 1px 0 #000,
+        1px -1px 0 #000,
+        1px -1px 0 #000;
     width: 100%;
-    padding: 8px; /* Add padding for spacing in table cells */
-    text-align: left; /* Align table cells to the left */
+    padding: 8px;
+    /* Add padding for spacing in table cells */
+    text-align: left;
+    /* Align table cells to the left */
 }
 
 .spinner {
-    border: 5px solid #f3f3f3; /* Light gray */
-    border-top: 5px solid #3498db; /* Blue */
+    border: 5px solid #f3f3f3;
+    /* Light gray */
+    border-top: 5px solid #3498db;
+    /* Blue */
     border-radius: 50%;
     width: 50px;
     height: 50px;
     animation: spin 1s linear infinite;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
