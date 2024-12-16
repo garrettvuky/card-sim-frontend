@@ -312,6 +312,7 @@ input[type="checkbox"].toggle:checked+label {
 
 .create {
     display: flex;
+    width: 100%;
     justify-content: center;
     align-items: center;
 }
